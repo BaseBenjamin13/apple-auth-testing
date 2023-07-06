@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import jwt_decode from "jwt-decode";
+import * as SecureStore from 'expo-secure-store';
 
 export default function App() {
 
@@ -13,6 +14,12 @@ export default function App() {
         const checkAvailable = async () => {
             const isAvailable = await AppleAuthentication.isAvailableAsync();
             setAppleAuthAvailable(isAvailable);
+
+            if(isAvailable) {
+                const credentialJson = await SecureStore.getItemAsync('apple-credentials');
+                console.log(credentialJson);
+                setUserToken(JSON.parse(credentialJson));
+            }
         }
         checkAvailable()
     }, [])
@@ -44,6 +51,8 @@ export default function App() {
             //     "state", 
             //     "user"
             // }
+            SecureStore.setItemAsync('apple-credentials', JSON.stringify(credential));
+
         } catch (error) {
             console.log(error)
         }
