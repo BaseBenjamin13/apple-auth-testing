@@ -15,17 +15,27 @@ export default function App() {
         checkAvailable()
     }, [])
 
-    const getAppleAuthContent = () => {
+    const loginWithApple = async () => {
         
+    }
+
+    const getAppleAuthContent = () => {
+        return <AppleAuthentication.AppleAuthenticationButton
+            buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+            buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+            cornerRadius={5}
+            style={styles.button}
+            onPress={loginWithApple}
+        />
     }
 
     return (
         <View style={styles.container}>
+            <Text>Apple Auth Testing!</Text>
             {appleAuthAvailable 
                 ? getAppleAuthContent()
                 : <Text>Apple auth unavailable</Text>
             }
-            <Text>Apple Auth Testing!</Text>
             <StatusBar style="auto" />
         </View>
     );
@@ -37,5 +47,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    button : {
+        width: 200,
+        height: 64,
+        margin: 10,
     },
 });
