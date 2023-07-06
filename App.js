@@ -65,6 +65,11 @@ export default function App() {
         // console logs 1 for authorized 2 for not found.
     }
 
+    const logout = async () => {
+        SecureStore.deleteItemAsync('apple-credentials');
+        setUserToken(undefined);
+    }
+
     const getAppleAuthContent = () => {
         if (!userToken) {
             return <AppleAuthentication.AppleAuthenticationButton
@@ -82,6 +87,7 @@ export default function App() {
                 <View>
                     <Text>{decoded.email}</Text>
                     <Text>Expired: {(current >= decoded.exp).toString()}</Text>
+                    <Button title="Logout" onPress={logout} />
                     <Button title="Get Credential State" onPress={getCredentialState} />
                 </View>
             )
