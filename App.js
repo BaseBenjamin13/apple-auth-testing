@@ -1,20 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as AppleAuthentication from 'expo-apple-authentication';
 
 export default function App() {
 
     const [appleAuthAvailable, setAppleAuthAvailable] = useState(false);
 
-    const getAppleAuthContent = () => {
+    useEffect(() => {
+        const checkAvailable = async () => {
+            const isAvailable = await AppleAuthentication.isAvailableAsync();
+            setAppleAuthAvailable(isAvailable);
+        }
+        checkAvailable()
+    }, [])
 
+    const getAppleAuthContent = () => {
+        
     }
 
     return (
         <View style={styles.container}>
-
-            <Text>Open up App.js to start working on your app!</Text>
+            {appleAuthAvailable 
+                ? getAppleAuthContent()
+                : <Text>Apple auth unavailable</Text>
+            }
+            <Text>Apple Auth Testing!</Text>
             <StatusBar style="auto" />
         </View>
     );
