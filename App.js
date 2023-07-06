@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import jwt_decode from "jwt-decode";
@@ -49,6 +49,13 @@ export default function App() {
         }
     }
 
+    //checks if the user is authorized or not found and what not.
+    const getCredentialState = async () => {
+        const credentialState = await AppleAuthentication.getCredentialStateAsync(userToken.user)
+        console.log(credentialState);
+        // console logs 1 for authorized 2 for not found.
+    }
+
     const getAppleAuthContent = () => {
         if (!userToken) {
             return <AppleAuthentication.AppleAuthenticationButton
@@ -66,6 +73,7 @@ export default function App() {
                 <View>
                     <Text>{decoded.email}</Text>
                     <Text>Expired: {(current >= decoded.exp).toString()}</Text>
+                    <Button title="Get Credential State" onPress={getCredentialState} />
                 </View>
             )
         }
@@ -73,7 +81,7 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <Text>Apple Auth Testing!</Text>
+            <Text style={styles.header}>Apple Auth Testing!</Text>
             {appleAuthAvailable
                 ? getAppleAuthContent()
                 : <Text>Apple auth unavailable</Text>
@@ -95,4 +103,8 @@ const styles = StyleSheet.create({
         height: 64,
         margin: 10,
     },
+    header: {
+        fontSize: 24,
+        margin: 10,
+    }
 });
