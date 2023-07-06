@@ -16,7 +16,34 @@ export default function App() {
     }, [])
 
     const loginWithApple = async () => {
-        
+        try {
+            const credential = await AppleAuthentication.signInAsync({
+                requestedScopes: [
+                    AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                    AppleAuthentication.AppleAuthenticationScope.EMAIL
+                ]
+            })
+            console.log(credential);
+            // console logs
+            // {
+            //     "authorizationCode", 
+            //     "email", 
+            //     "fullName": {
+            //         "familyName", 
+            //         "givenName", 
+            //         "middleName", 
+            //         "namePrefix", 
+            //         "nameSuffix", 
+            //         "nickname"
+            //     }, 
+            //     "identityToken", 
+            //     "realUserStatus", 
+            //     "state", 
+            //     "user"
+            // }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const getAppleAuthContent = () => {
