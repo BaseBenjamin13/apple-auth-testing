@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import * as SecureStore from 'expo-secure-store';
 
 import AppleAuth from './components/auth/AppleAuth';
+import GoogleAuth from './components/auth/GoogleAuth';
 
 export default function App() {
 
@@ -14,6 +15,8 @@ export default function App() {
             <Text style={styles.header}>Auth Testing!</Text>
 
             <AppleAuth />
+
+            <GoogleAuth />
 
             <StatusBar style="auto" />
         </View>
