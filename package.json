@@ -15,14 +15,15 @@
     "expo-auth-session": "^5.0.2",
     "expo-cli": "^6.3.10",
     "expo-secure-store": "^12.3.1",
+    "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
     "expo-web-browser": "^12.3.2",
     "jwt-decode": "^3.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
-    "react-native-web": "~0.18.10",
-    "expo-splash-screen": "~0.18.2"
+    "react-native-dotenv": "^3.4.9",
+    "react-native-web": "~0.18.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
